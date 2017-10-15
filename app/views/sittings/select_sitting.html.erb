@@ -1,0 +1,31 @@
+<div class ="container-fluid">
+   <div class="col-xs-12 col-md-6">
+     <div id="links" class="col-xs-12">
+        <%=button_to 'New Activity', meetings_new_other_meeting_path, :class => "btn btn-primary btn-padded"%>
+      </div>
+      <div id="links" class="col-xs-12">
+        <%=button_to 'Manage activities', meetings_show_other_path, :class => "btn btn-primary btn-padded"%>
+      </div>
+      <div id="links" class="col-xs-12">
+        <%=button_to 'Manage clients', students_manage_students_path, :class => "btn btn-primary btn-padded"%>
+      </div>
+      <div id="links" class="col-xs-12">
+        <%=button_to 'Manage partners', groups_manage_groups_path, :class => "btn btn-primary btn-padded" %>
+      </div>
+      <div id="links" class="col-xs-12">
+        <%=button_to 'Generate reports', new_report_path, :class => "btn btn-primary btn-padded" %>
+      </div>
+      <div id="links" class="col-xs-12">
+        <%=button_to 'Sign out', destroy_user_session_path, :method=>'delete', :class => "btn btn-primary btn-padded" %>
+      </div>
+   </div>
+</div>
+
+
+
+
+
+
+
+
+

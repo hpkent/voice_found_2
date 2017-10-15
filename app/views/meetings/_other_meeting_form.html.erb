@@ -1,0 +1,34 @@
+<%= form_for(@other_meeting, :url=>{:action=>"update"}) do |f| %>
+   <div class="field">
+      <%= f.hidden_field :sitting_id, :value => nil%>
+      <%= f.hidden_field :meeting_type_id, :value => @other_meeting_type%>
+   </div>
+   <div class="field col-xs-3">
+      <%= f.label :student_id, "Client" %>
+      <%= autocomplete_field_tag('Name', '', autocomplete_meeting_path, :id_element => "#meeting_student_id", class: "form-control", id:"name-search-autocomplete") %>
+      <%= f.hidden_field :student_id%>
+   </div>
+   <div class="field col-xs-12">
+      <%= f.label :start_date, "Meeting Date" %>
+      <%= f.date_select :start_date %>
+   </div>
+   <div class="field col-xs-12">
+      <%= f.label :partner_id, "Partner (if Applicable)" %>
+      <%= f.collection_select(:partner_id, Partner.all, :id, :org_name, {:class =>'form-control'}) %>
+   </div>
+   <div class="field col-xs-12">
+      <%= f.label :monastic_id, "Case Manager" %>
+      <%= f.collection_select(:monastic_id, Monastic.all, :id, :monastic_name, {:class =>'form-control'}) %>
+   </div>
+   <div class="field col-xs-12">
+      <%= f.label :meeting_type_id, "Activity Type" %>
+      <%= f.collection_select(:meeting_type_id, MeetingType.all, :id, :name, {:class =>'form-control'}) %>
+   </div>
+   <div class="field col-xs-12">
+      <%= f.label :duration, "Duration" %>
+      <%= f.text_field :duration %>
+   </div>
+   <div id= "buttonId" class="actions col-xs-12 text-left">
+      <%= f.submit "Submit", class:"btn btn-default btn-xs" %>
+   </div>
+<%end%>

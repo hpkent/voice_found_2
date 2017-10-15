@@ -1,0 +1,65 @@
+<div class="container-fluid">
+   <div class="row col-xs-12">
+      <div id= "links" class="actions">
+         <div>
+            <%= button_to('New Activity', meetings_new_other_meeting_path, :class => 'btn btn-primary pull-right btn-padded')  %>
+         </div>
+      </div>
+   </div>
+   <div class="row col-xs-12">
+      <table class="table table-hover table-condensed">
+         <thead>
+            <tr class="noborder">
+               <th colspan="5"><h3>View Meetings</h3></th>
+            </tr>
+            <tr>
+               <th>Client Name</th>
+               <th>Date</th>
+               <th>Case Manager</th>
+               <th>Activity</th>
+               <th>Duration</th>
+               <th>Edit</th>
+               <th>Delete</th>
+            </tr>
+         </thead>
+            <% @other_meetings.each do |meeting| %>
+            <tr>
+               <td id="name">
+                  <% if meeting.last_name != nil %>
+                  <%=meeting.first_name + " " + meeting.last_name%>
+                  <%else %>
+                  <%=meeting.first_name%>
+                  <%end%>
+               </td>
+               <td>
+                  <% if meeting.start_date != nil %>
+                     <%=meeting.start_date%>
+                  <%end%>
+               </td>
+               <td>
+                  <% if meeting.monastic_id != nil %>
+                     <%=Monastic.find(meeting.monastic_id).first_name%>
+                  <%end%>
+               </td>
+               <td>
+                  <% if meeting.meeting_type_id != nil %>
+                     <%=MeetingType.find(meeting.meeting_type_id).name%>
+                  <%end%>
+               </td>
+               <td>
+                  <% if meeting.duration != nil %>
+                     <%=meeting.duration%>
+                  <%end%>
+               </td>
+               <td>
+                  <%= button_to('Edit', "#{meeting.id}/edit_other_meeting", :class => 'btn btn-secondary btn-sm')%>
+               </td>
+               <td>
+                  <%= button_to('Delete', "/meetings/#{meeting.id}/delete_other_meeting", :method => :delete,
+                      data: { confirm: 'Are you sure?' }, :class => 'btn btn-secondary btn-sm')%>
+               </td>
+            </tr>
+          <%end%>
+      </table>
+   </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="container-fluid">
+<div id="links" class="row col-xs-8">
+  <%= button_to('Back', students_manage_students_path, :class => 'btn btn-primary pull-right btn-padded')  %>
+</div>
+<div class="row col-xs-8">
+   <div>
+      <h2> History - <%=display_name%></h2>
+   </div>
+   <div>
+      <table class="table table-hover table-condensed">
+         <thead>
+            <tr class="noborder">
+               <th colspan="3"><h3>Recent meetings</h3>
+            </tr>
+            <tr>
+               <th> Date</th>
+               <th> Case Manager </th>
+            </tr>
+         </thead>
+            <%if @show_meetings.length > 0%>
+               <% @show_meetings.each do |meeting| %>
+                  <tr>
+                     <%if meeting.start_date != nil%>
+                        <td><%=meeting.start_date.strftime("%A, %B %-d, %Y")%></td>
+                     <%end%>
+                     <%if meeting.initials != nil%>
+                        <td><%=meeting.initials%></td>
+                     <%end%>
+                  </tr>
+               <%end%>
+            <%end%>
+      </table>
+   </div>
+</div>
