@@ -5,23 +5,23 @@
             <%= button_to('Download Excel Document', reports_excel_path(format: 'xlsx'), :class => 'btn btn-primary buttoncolour pull-right')%>
     </div>
 
-       
-    <table id="student-group-table" class="table table-condensed">
+
+    <table id="client-group-table" class="table table-condensed">
 
       <thead>
         <tr class="noborder">
             <th colspan="4"><h4>Attendance Report</h4></th>
 
-        </tr>  
+        </tr>
         <tr>
             <th>Sitting Start Date</th>
             <th>Sitting End Date</th>
             <th>Sitting Title </th>
-            <th>Student Name </th>
+            <th>Client Name </th>
         </tr>
       </thead>
-        <%if @student_sittings_report != nil %>  
-          <% @student_sittings_report.each do |record| %>
+        <%if @client_sittings_report != nil %>
+          <% @client_sittings_report.each do |record| %>
             <tr>
               <td id="name">
                 <%=record.sitting_start_date%>
@@ -33,15 +33,15 @@
                 <%=record.sitting_event_title%>
               </td>
               <td id="name">
-                <% if record.student_last_name != nil %>
-                    <%=record.student_first_name + " " + record.student_last_name%>
+                <% if record.client_last_name != nil %>
+                    <%=record.client_first_name + " " + record.client_last_name%>
                 <%else %>
-                    <%=record.student_first_name%>
+                    <%=record.client_first_name%>
                 <%end%>
               </td>
             </tr>
           <%end%>
         <%end%>
-    </table>                   
+    </table>
   </div>
 </div>

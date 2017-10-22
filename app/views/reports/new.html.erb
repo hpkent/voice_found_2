@@ -7,7 +7,7 @@
 
         <div class="well">
             <h4>Generate a client report</h4>
-            <%=form_tag(reports_student_report_path(format: 'xlsx'), method: "get") do %>
+            <%=form_tag(reports_client_report_path(format: 'xlsx'), method: "get") do %>
             <div class="">
                 <%= label_tag("start_date", "Start Date")%>
                 <%= date_select("report", "start_date")%>
@@ -17,8 +17,8 @@
                 <%= date_select("report", "end_date")%>
             </div>
             <div class="">
-                <%= label_tag "Search for a student" %>
-                <%= autocomplete_field_tag('Name', '', autocomplete_student_path, :id_element => "#students_sitting_student_id", class: "form-control", id:"name-search-autocomplete") %>
+                <%= label_tag "Search for a client" %>
+                <%= autocomplete_field_tag('Name', '', autocomplete_client_path, :id_element => "#clients_sitting_client_id", class: "form-control", id:"name-search-autocomplete") %>
                 </div>
             <div id= "buttonId" class="actions">
                 <%= submit_tag "Create Report", :class =>"btn btn-primary btn-padded" %>

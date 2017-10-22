@@ -2,7 +2,7 @@
    <div class="row col-xs-12">
       <div id= "links" class="actions">
          <div>
-            <%= button_to('New Client', new_student_path, :class => 'btn  btn-primary pull-right btn-padded')  %>
+            <%= button_to('New Client', new_client_path, :class => 'btn  btn-primary pull-right btn-padded')  %>
          </div>
 
       </div>
@@ -21,26 +21,26 @@
                <th>Delete</th>
             </tr>
          </thead>
-            <% @students.each do |student| %>
+            <% @clients.each do |client| %>
             <tr>
                <td id="name">
-                  <% if student.last_name != nil %>
-                     <%=student.first_name + " " + student.last_name%>
+                  <% if client.last_name != nil %>
+                     <%=client.first_name + " " + client.last_name%>
                   <%else %>
-                     <%=student.first_name%>
+                     <%=client.first_name%>
                   <%end%>
                </td>
                <td>
-                  <% if student.category_type.name != nil %>
-                     <%=student.category_type.name%>
+                  <% if client.category_type.name != nil %>
+                     <%=client.category_type.name%>
                   <%end%>
                </td>
                <td>
-                  <%= button_to('Show History', "/students/#{student.id}/history", :class => 'btn btn-secondary btn-sm')%>
+                  <%= button_to('Show History', "/clients/#{client.id}/history", :class => 'btn btn-secondary btn-sm')%>
                </td>
-               <td><%= button_to('Edit', edit_student_path(student), :class => 'btn btn-secondary btn-sm')%>
+               <td><%= button_to('Edit', edit_client_path(client), :class => 'btn btn-secondary btn-sm')%>
                </td>
-               <td><%= button_to 'Delete', student_path(student), :class => 'btn btn-secondary btn-sm',
+               <td><%= button_to 'Delete', client_path(client), :class => 'btn btn-secondary btn-sm',
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %></td>
                </td>

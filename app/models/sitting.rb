@@ -1,19 +1,19 @@
 class Sitting < ActiveRecord::Base
-  has_many :students_sittings
-  has_many :students, through: :students_sittings
+  has_many :clients_sittings
+  has_many :clients, through: :clients_sittings
   has_many :notes
 
-  def sitting_info 
-    "#{self.event_title} - #{self.start_date.strftime("%A, %B %-d, %Y")}" 
+  def sitting_info
+    "#{self.event_title} - #{self.start_date.strftime("%A, %B %-d, %Y")}"
   end
 
   def self.refresh_calendar
     client = Google::APIClient.new
     t = Token.last
-    t.refresh_access_token 
+    t.refresh_access_token
     # client.authorization.access_token = t.access_token
     client.authorization.access_token = Token.last.refresh_access_token
-    calendar_api = client.discovered_api('calendar', 'v3')  
+    calendar_api = client.discovered_api('calendar', 'v3')
     result = client.execute(
       :api_method => calendar_api.events.list,
       :parameters => {
@@ -30,7 +30,7 @@ class Sitting < ActiveRecord::Base
     #   start_time = event.start.date_time
     #   end_date = event.end.date
     #   end_time = event.end.date_time
-    #   event_title = event.summary 
+    #   event_title = event.summary
     # end
     self.update_calendar(result.data.items)
   end
@@ -50,30 +50,30 @@ class Sitting < ActiveRecord::Base
       end
       if (local_start_time!=nil) then
         @calendar_sitting = Sitting.where(start_time:local_start_time, event_title:summary).first_or_initialize  do |sitting_record|
-            sitting_record.start_date = start_dt 
+            sitting_record.start_date = start_dt
             sitting_record.end_date = end_dt
-            sitting_record.end_time = local_end_time       
+            sitting_record.end_time = local_end_time
         end
         puts "status is: #{summary} and #{local_start_time}"
         if @calendar_sitting.save
           puts "data refreshed"
         else
           puts "data likely not refreshed"
-        end     
-       #if no local start time 
+        end
+       #if no local start time
       else
         @calendar_sitting = Sitting.where(start_date:start_date, event_title:summary).first_or_initialize  do |sitting_record|
-            sitting_record.end_date = end_date       
-        end  
+            sitting_record.end_date = end_date
+        end
         puts "status is: #{summary} and #{start_date}"
         if @calendar_sitting.save
           puts "data refreshed"
         else
           puts "data likely not refreshed"
-        end     
-      end 
+        end
+      end
     end
-  end 
+  end
 end
 
 

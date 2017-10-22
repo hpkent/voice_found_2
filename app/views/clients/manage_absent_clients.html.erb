@@ -1,0 +1,82 @@
+<div class="container-fluid">
+   <div id="links" class="row col-xs-12">
+      <%= button_to('Back', clients_manage_clients_path, :class => 'btn btn-primary btn-padded pull-right')%>
+   </div>
+   <div class="row col-xs-8">
+      <table class="table table-hover table-condensed">
+         <thead>
+            <tr class="noborder">
+               <th colspan="5">
+                  <h3>Absent clients</h3>
+                  <p>Associate and General clients who have been absent for 90 days or more</p>
+               </th>
+            </tr>
+            <tr>
+               <th>Client Name</th>
+               <th>Category</th>
+               <th>Recent History</th>
+            </tr>
+         </thead>
+            <% @clients.each do |client| %>
+               <% last_sitting_date = client.calc_last_attended(client)
+                  if last_sitting_date != nil
+                     if last_sitting_date <= (Date.today - 90) %>
+                  <tr>
+                     <td id="name">
+                        <% if client.last_name != nil %>
+                           <%=client.first_name + " " + client.last_name%>
+                        <%else %>
+                           <%=client.first_name%>
+                        <%end%>
+                     </td>
+                     <td>
+                        <% if client.category_type.name != nil %>
+                           <%=client.category_type.name%>
+                        <%end%>
+                     </td>
+                     <td>
+                        <%= button_to('Show History', "/clients/#{client.id}/history", :class => 'btn btn-secondary btn-sm')%>
+                     </td>
+                  </tr>
+                  <%end%>
+               <%end%>
+         <%end%>
+      <thead>
+         <tr class="noborder">
+             <th colspan="5">
+               <h3>Clients without sitting records</h3>
+               <p>Associate and General clients who have no recorded sittings in our database. New clients are excluded for 30 days</p>
+             </th>
+         </tr>
+         <tr>
+             <th>Client Name</th>
+             <th>Category</th>
+             <th>Recent History</th>
+         </tr>
+      </thead>
+         <% @clients.each do |client| %>
+            <% if client.calc_wrong_category(client) == nil
+                  if client.acceptance_date <= (Date.today - 30) %>
+                  <tr>
+                     <td id="name">
+                        <% if client.last_name != nil %>
+                           <%=client.first_name + " " + client.last_name%>
+                        <%else %>
+                           <%=client.first_name%>
+                        <%end%>
+                     </td>
+                     <td>
+                        <% if client.category_type.name != nil %>
+                           <%=client.category_type.name%>
+                        <%end%>
+                     </td>
+                     <td>
+                        <%= button_to('Show History', "/clients/#{client.id}/history", :class => 'btn btn-secondary btn-sm')%>
+                     </td>
+                  </tr>
+                  <%end%>
+               <%end%>
+            <%end%>
+      </table>
+   </div>
+</div>

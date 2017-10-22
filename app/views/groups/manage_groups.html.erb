@@ -7,7 +7,7 @@
       </div>
    </div>
    <div class="row col-xs-12">
-      <table id="student" class="table table-condensed">
+      <table id="client" class="table table-condensed">
          <thead>
             <tr class="noborder">
                <th colspan="5"><h3>Manage Partners</h3></th>
@@ -27,7 +27,7 @@
                <%= link_to 'Edit Info', "/groups/#{group.id}/edit" %>
             </td>
             <td>
-               <%= link_to 'Edit Members', "/groups/#{group.id}/all_students_in_group" %>
+               <%= link_to 'Edit Members', "/groups/#{group.id}/all_clients_in_group" %>
             </td>
             <td>
                <%= link_to 'Delete', "/groups/#{group.id}/delete_group",

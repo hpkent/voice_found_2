@@ -37,8 +37,8 @@
                   <%end%>
                </td>
                <td>
-                  <% if meeting.monastic_id != nil %>
-                     <%=Monastic.find(meeting.monastic_id).first_name%>
+                  <% if meeting.manager_id != nil %>
+                     <%=Manager.find(meeting.manager_id).first_name%>
                   <%end%>
                </td>
                <td>

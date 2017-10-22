@@ -50,50 +50,50 @@ Rails.application.routes.draw do
   get '/sittings/view_past_sittings' => 'sittings#view_past_sittings'
 
 
-  #students
-  delete '/students/:students_sittings_id/cancel_attendance' => 'students#cancel_attendance'
-  post '/students/attendance/' => 'students#attendance'
-  get '/students/attendance', to:'students#attendance'
-  get '/students/list_all' => 'students#list_all'
-  post '/students/list_all' => 'students#list_all'
-  post '/students/update_list_all_student' => 'students#update_list_all_student'
-  post '/students/update_students_sitting_autocomplete' => 'students#update_students_sitting_autocomplete'
-  post '/students/update_student_status' => 'students#update_student_status'
-  get '/students/autocomplete', to: 'students#autocomplete', as: 'autocomplete_student'
-  # post '/students/js_add_student_to_sitting', to: 'students#js_add_student_to_sitting'
-  get 'students/home' => 'students#home'
-  get '/students/schedule_meetings' => 'students#schedule_meetings'
-  post '/students/schedule_meetings' => 'students#schedule_meetings'
-  get '/students/:group_id/new_dropdown' =>'students#new_dropdown'
-  post '/students/new_dropdown' =>'students#new_dropdown'
-  get '/students/manage_students' => 'students#manage_students'
-  post '/students/manage_students' => 'students#manage_students'
-  get '/students/manage_inactive_students' => 'students#manage_inactive_students'
-  post '/students/manage_inactive_students' => 'students#manage_inactive_students'
-  get '/students/manage_absent_students' => 'students#manage_absent_students'
-  post '/students/manage_absent_students' => 'students#manage_absent_students'
-  post '/students/new' => 'students#new'
-  get  'students/:id/history' => 'students#history'
-  post '/students/:id/history' => 'students#history'
-  post '/students/:id/edit' => 'students#edit'
-  post '/students/:id/update' => 'students#update'
-  patch '/students/:id/update' => 'students#update'
-  get '/students/update' => 'students#update'
-  post '/students/update' => 'students#update'
+  #clients
+  delete '/clients/:clients_sittings_id/cancel_attendance' => 'clients#cancel_attendance'
+  post '/clients/attendance/' => 'clients#attendance'
+  get '/clients/attendance', to:'clients#attendance'
+  get '/clients/list_all' => 'clients#list_all'
+  post '/clients/list_all' => 'clients#list_all'
+  post '/clients/update_list_all_client' => 'clients#update_list_all_client'
+  post '/clients/update_clients_sitting_autocomplete' => 'clients#update_clients_sitting_autocomplete'
+  post '/clients/update_client_status' => 'clients#update_client_status'
+  get '/clients/autocomplete', to: 'clients#autocomplete', as: 'autocomplete_client'
+  # post '/clients/js_add_client_to_sitting', to: 'clients#js_add_client_to_sitting'
+  get 'clients/home' => 'clients#home'
+  get '/clients/schedule_meetings' => 'clients#schedule_meetings'
+  post '/clients/schedule_meetings' => 'clients#schedule_meetings'
+  get '/clients/:group_id/new_dropdown' =>'clients#new_dropdown'
+  post '/clients/new_dropdown' =>'clients#new_dropdown'
+  get '/clients/manage_clients' => 'clients#manage_clients'
+  post '/clients/manage_clients' => 'clients#manage_clients'
+  get '/clients/manage_inactive_clients' => 'clients#manage_inactive_clients'
+  post '/clients/manage_inactive_clients' => 'clients#manage_inactive_clients'
+  get '/clients/manage_absent_clients' => 'clients#manage_absent_clients'
+  post '/clients/manage_absent_clients' => 'clients#manage_absent_clients'
+  post '/clients/new' => 'clients#new'
+  get  'clients/:id/history' => 'clients#history'
+  post '/clients/:id/history' => 'clients#history'
+  post '/clients/:id/edit' => 'clients#edit'
+  post '/clients/:id/update' => 'clients#update'
+  patch '/clients/:id/update' => 'clients#update'
+  get '/clients/update' => 'clients#update'
+  post '/clients/update' => 'clients#update'
 
   #special_status
-  get '/students/:student_id/new_special_status' => 'students#new_special_status'
-  post '/students/update_special_status' => 'students#update_special_status'
+  get '/clients/:client_id/new_special_status' => 'clients#new_special_status'
+  post '/clients/update_special_status' => 'clients#update_special_status'
 
   #location
-  post '/students/update_location_status' => 'students#update_location_status'
+  post '/clients/update_location_status' => 'clients#update_location_status'
 
   #meetings
   post '/meetings/:meeting_id/delete_other_meeting' => 'meetings#delete_other_meeting'
   delete '/meetings/:meeting_id/delete_other_meeting' => 'meetings#delete_other_meeting'
   post '/meetings/:meeting_id/edit_other_meeting' => 'meetings#edit_other_meeting'
   get '/meetings/:meeting_id/edit_other_meeting' => 'meetings#edit_other_meeting'
-  get '/meetings/:student_id/new' => 'meetings#new'
+  get '/meetings/:client_id/new' => 'meetings#new'
   post '/meetings/update' => 'meetings#update'
   delete '/meetings/:meeting_id/destroy' => 'meetings#destroy'
   post '/meetings/new_other_meeting' => 'meetings#new_other_meeting'
@@ -103,12 +103,12 @@ Rails.application.routes.draw do
   post '/meetings/show_other' => 'meetings#show_other'
 
   #groups
-  delete '/groups/:students_groups_id/delete_students_groups' => 'groups#delete_students_groups'
+  delete '/groups/:clients_groups_id/delete_clients_groups' => 'groups#delete_clients_groups'
   delete '/groups/:id/delete_group' => 'groups#delete_group'
-  get '/groups/:id/all_students_in_group' => 'groups#all_students_in_group'
+  get '/groups/:id/all_clients_in_group' => 'groups#all_clients_in_group'
   post '/groups/manage_groups' => 'groups#manage_groups'
   get '/groups/manage_groups' => 'groups#manage_groups'
-  post '/groups/update_students_in_group' => 'groups#update_students_in_group'
+  post '/groups/update_clients_in_group' => 'groups#update_clients_in_group'
   post '/groups/new' => 'groups#new'
   post '/groups/:id/edit' => 'groups#edit'
   get '/groups/:id/update' => 'groups#update'
@@ -132,18 +132,18 @@ Rails.application.routes.draw do
   post 'reports/attendance_report' => 'reports#attendance_report'
   get 'reports/meeting_report' => 'reports#meeting_report'
   post 'reports/meeting_report' => 'reports#meeting_report'
-  get 'reports/student_report' => 'reports#student_report'
-  post 'reports/student_report' => 'reports#student_report'
+  get 'reports/client_report' => 'reports#client_report'
+  post 'reports/client_report' => 'reports#client_report'
 
 
   # resources :sessions
   # resources :users
   resources :reports
-  resources :students
+  resources :clients
   resources :meetings
   resources :monastics
   resources :sittings
-  resources :students_sittings
+  resources :clients_sittings
   resources :attendance_status_types
   resources :groups
   resources :notes

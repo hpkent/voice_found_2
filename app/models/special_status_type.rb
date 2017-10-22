@@ -1,3 +1,3 @@
 class SpecialStatusType < ActiveRecord::Base
-  has_many :students_sittings
+  has_many :clients_sittings
 end

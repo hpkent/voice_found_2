@@ -1,8 +1,8 @@
 <div class="container-fluid nopadding">
    <div id="links" class="col-xs-12">
-      <%= button_to('Back', students_attendance_path, :class => 'btn btn-primary btn-padded pull-right')  %>
+      <%= button_to('Back', clients_attendance_path, :class => 'btn btn-primary btn-padded pull-right')  %>
       <%= button_to('Home', sittings_select_sitting_path, :class => 'btn btn-primary btn-padded pull-right')  %>
-   </div>     
+   </div>
    <div class="col-xs-12">
       <h2>Sitting Attendance</h2>
    </div>
@@ -13,14 +13,14 @@
             </h4>
          </div>
          <div class="panel-body">
-            <div class="col-xs-12">    
+            <div class="col-xs-12">
                <% if @current_note != nil %>
                   <p><%=@current_note.content%></p>
                <%end%>
-            </div>    
+            </div>
             <div class="col-xs-12">
                <%=form_for(@sitting, :url => {:controller => "sittings", :action => "update"}, :html => {:class => "form-inline", :id => "no_meeting_flag"}, remote: true) do |f| %>
-                  <%= f.label :no_meeting_flag, 'No one seen' %> 
+                  <%= f.label :no_meeting_flag, 'No one seen' %>
                   <%=f.hidden_field :start_date, :value => @sitting.start_date%>
                   <%=f.hidden_field :start_time, :value => @sitting.start_time%>
                   <%if @sitting.no_meeting_flag == true %>
@@ -28,25 +28,25 @@
                   <%else%>
                      <%= f.check_box :no_meeting_flag, options = {:checked => false, :class => "checkbox"} %>
                   <%end%>
-               <%end%>        
+               <%end%>
             </div>
          </div>
       </div>
-   </div>    
+   </div>
    <div class="col-xs-12">
       <table class="table table-condensed">
          <thead>
             <tr class="noborder">
-                 <% @i = 0    
-                 @attending_students.each do |student|
+                 <% @i = 0
+                 @attending_clients.each do |client|
                    @i += 1
                  end
-                 @attending_monastics.each do |monastic|
+                 @attending_managers.each do |manager|
                      @i +=1
                  end
-                 %>  
-               <p class="norm">Number of students: <%=@i%></p>
-            </tr>           
+                 %>
+               <p class="norm">Number of clients: <%=@i%></p>
+            </tr>
             <tr>
                <th class="norm">Name</th>
                <th id="th-align" class="norm">Notes</th>
@@ -56,25 +56,25 @@
             </tr>
          </thead>
             <tr>
-               <% @attending_monastics.each do |student| %>
+               <% @attending_managers.each do |client| %>
             <tr>
                <td class="norm">
-                  <% if student.last_name != nil %>
-                     <%=student.first_name + " " + student.last_name%>
+                  <% if client.last_name != nil %>
+                     <%=client.first_name + " " + client.last_name%>
                   <%else %>
-                     <%=student.first_name%>
-                  <%end%>  
-                  <% if student.bench == true %>
-                     <%=image_tag("bench.png", size:"20", class:"bench")%>       
+                     <%=client.first_name%>
+                  <%end%>
+                  <% if client.bench == true %>
+                     <%=image_tag("bench.png", size:"20", class:"bench")%>
                   <%end%>
                </td>
                <td id="td-align" class="norm">
-                  <% if student.special_status != nil %>
-                        <%=student.special_status%>
+                  <% if client.special_status != nil %>
+                        <%=client.special_status%>
                   <%end%>
                </td>
                <td id="td-align" class="norm">
-                  <% if student.hatto != nil && student.hatto != 0 %>
+                  <% if client.hatto != nil && client.hatto != 0 %>
                      <i class="glyphicon glyphicon-ok"></i>
                   <%end%>
                </td>
@@ -83,62 +83,62 @@
                <td>
                </td>
             </tr>
-            <%end%> 
-               <% @attending_students.each do |student| %>
+            <%end%>
+               <% @attending_clients.each do |client| %>
             <tr>
                <td class="norm">
-                  <% if student.last_name != nil %>
-                     <%=student.first_name + " " + student.last_name%>
+                  <% if client.last_name != nil %>
+                     <%=client.first_name + " " + client.last_name%>
                   <%else %>
-                     <%=student.first_name%>
-                  <%end%>  
-                  <% if student.bench == true %>
+                     <%=client.first_name%>
+                  <%end%>
+                  <% if client.bench == true %>
                     <%=image_tag("bench.png", size:"20", class:"bench")%>
-                  <%end%>      
+                  <%end%>
                </td>
                <td id="td-align" class="norm">
-                  <% if student.special_status != nil
-                     if student.special_status == "Retreat"%>
-                        <%="Retreat (#{student.acceptance_date})"%>
+                  <% if client.special_status != nil
+                     if client.special_status == "Retreat"%>
+                        <%="Retreat (#{client.acceptance_date})"%>
                      <%else%>
-                        <%=student.special_status%>
+                        <%=client.special_status%>
                      <%end%>
                   <%end%>
                </td>
                <td id="td-align" class="norm">
-                  <% if student.hatto != nil && student.hatto != 0 %>
+                  <% if client.hatto != nil && client.hatto != 0 %>
                      <i class="glyphicon glyphicon-ok"></i>
                   <%end%>
                </td>
-               <td id="td-align" class="norm">  
-                  <%if student.days_since_last_seen.nil? %>
-                     N/A                              
+               <td id="td-align" class="norm">
+                  <%if client.days_since_last_seen.nil? %>
+                     N/A
                   <%else%>
-                     <%= student.days_since_last_seen %>
-                  <%end%>    
+                     <%= client.days_since_last_seen %>
+                  <%end%>
                </td>
                <td>
                   <div id="center">
-                     <div class="btn-group" role="group">            
-                     <%@id = student.meeting_id
+                     <div class="btn-group" role="group">
+                     <%@id = client.meeting_id
                      if Meeting.where(id:@id).exists?
-                        @meeting = Meeting.find(@id).monastic_id
-                        @monastic = Monastic.find(@meeting).initials
+                        @meeting = Meeting.find(@id).manager_id
+                        @manager = Manager.find(@meeting).initials
                      %>
-                     <div id="btn-correction" class="btn btn-xs disabled">  
-                        <%=@monastic %>   
+                     <div id="btn-correction" class="btn btn-xs disabled">
+                        <%=@manager %>
                      </div>
                      <div id="scheduled_btn" class="btn">
-                        <%=link_to "/meetings/#{student.id}/new", class:"btn btn-default btn-xs" do%>
+                        <%=link_to "/meetings/#{client.id}/new", class:"btn btn-default btn-xs" do%>
                            <i class="glyphicon glyphicon-edit"></i>
                         <%end%>
-                        <%=link_to "/meetings/#{student.meeting_id}/destroy", :method => :delete, class:"btn btn-default btn-xs" do %>
+                        <%=link_to "/meetings/#{client.meeting_id}/destroy", :method => :delete, class:"btn btn-default btn-xs" do %>
                            <i class="glyphicon glyphicon-remove"></i>
                         <%end%>
-                     </div>  
+                     </div>
                      <%else%>
                      <div id="scheduled_btn" class="btn">
-                        <%=link_to "/meetings/#{student.id}/new", class:"btn btn-default btn-xs" do%>
+                        <%=link_to "/meetings/#{client.id}/new", class:"btn btn-default btn-xs" do%>
                            <i class="glyphicon glyphicon-edit"></i>
                         <%end%>
                      </div>

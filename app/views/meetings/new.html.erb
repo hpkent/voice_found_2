@@ -1,7 +1,7 @@
 <div class="container-fluid">
    <div class="col-xs-12 col-md-8">
       <div id= "links" class="actions">
-         <%= button_to('Back', students_schedule_meetings_path, :class => 'btn btn-primary pull-right btn-padded')%>
+         <%= button_to('Back', clients_schedule_meetings_path, :class => 'btn btn-primary pull-right btn-padded')%>
       </div>
    </div>
    <div class="col-xs-12 col-md-8">
@@ -21,14 +21,14 @@
                </td>
                <td>
                   <%= form_for(@meeting, :url=>{:action=>"update"},:html => {
-                     :class =>"select_student_group_form"}) do |f| %>
+                     :class =>"select_client_group_form"}) do |f| %>
                      <div class="field">
                          <%= f.hidden_field :sitting_id, :value => @sitting_id %>
-                         <%= f.hidden_field :student_id, :value => @student_id %>
+                         <%= f.hidden_field :client_id, :value => @client_id %>
                          <%= f.hidden_field :start_date, :value => @sitting_start_date %>
                          <%= f.hidden_field :start_time, :value => @sitting_start_time %>
                          <%= f.hidden_field :meeting_type_id, :value => @regular_meeting_type%>
-                         <%= f.collection_select(:monastic_id, Monastic.all, :id, :monastic_name, {:class =>'form-control'}) %>
+                         <%= f.collection_select(:manager_id, Manager.all, :id, :manager_name, {:class =>'form-control'}) %>
                      </div>
                      <div id= "buttonId" class="actions col-xs-6 text-left">
                          <%= f.submit "Submit", class:"btn btn-default btn-md center-block" %>
@@ -42,7 +42,7 @@
             </tr>
             <tr>
                <th class="norm"> Sitting </th>
-               <th class="norm"> Monastic </th>
+               <th class="norm"> Manager </th>
             </tr>
          </thead>
             <% @show_meetings.each do |meeting| %>

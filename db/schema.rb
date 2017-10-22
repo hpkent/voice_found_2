@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015031359) do
+ActiveRecord::Schema.define(version: 20171022015534) do
 
   create_table "attendance_status_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -24,6 +24,22 @@ ActiveRecord::Schema.define(version: 20171015031359) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "order",      limit: 4
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string   "first_name",           limit: 255
+    t.string   "last_name",            limit: 255
+    t.integer  "category_type_id",     limit: 4
+    t.date     "acceptance_date"
+    t.string   "email",                limit: 255
+    t.string   "dietary_restrictions", limit: 255
+    t.text     "other",                limit: 65535
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "days_since_last_seen", limit: 4
+    t.date     "date_last_seen"
+    t.boolean  "bench",                limit: 1
+    t.integer  "senority",             limit: 4
   end
 
   create_table "groups", force: :cascade do |t|
@@ -39,6 +55,16 @@ ActiveRecord::Schema.define(version: 20171015031359) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "managers", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "first_name", limit: 255
+    t.string   "last_name",  limit: 255
+    t.string   "initials",   limit: 255
+    t.string   "email",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "meeting_types", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
@@ -46,8 +72,8 @@ ActiveRecord::Schema.define(version: 20171015031359) do
   end
 
   create_table "meetings", force: :cascade do |t|
-    t.integer  "student_id",      limit: 4
-    t.integer  "monastic_id",     limit: 4
+    t.integer  "client_id",       limit: 4
+    t.integer  "manager_id",      limit: 4
     t.integer  "note_id",         limit: 4
     t.integer  "sitting_id",      limit: 4
     t.datetime "created_at",                 null: false
@@ -57,16 +83,6 @@ ActiveRecord::Schema.define(version: 20171015031359) do
     t.integer  "meeting_type_id", limit: 4
     t.float    "duration",        limit: 24
     t.integer  "partner_id",      limit: 4
-  end
-
-  create_table "monastics", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.string   "first_name", limit: 255
-    t.string   "last_name",  limit: 255
-    t.string   "initials",   limit: 255
-    t.string   "email",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
   end
 
   create_table "note_types", force: :cascade do |t|
@@ -106,22 +122,6 @@ ActiveRecord::Schema.define(version: 20171015031359) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "priority",   limit: 4
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string   "first_name",           limit: 255
-    t.string   "last_name",            limit: 255
-    t.integer  "category_type_id",     limit: 4
-    t.date     "acceptance_date"
-    t.string   "email",                limit: 255
-    t.string   "dietary_restrictions", limit: 255
-    t.text     "other",                limit: 65535
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.integer  "days_since_last_seen", limit: 4
-    t.date     "date_last_seen"
-    t.boolean  "bench",                limit: 1
-    t.integer  "senority",             limit: 4
   end
 
   create_table "students_groups", force: :cascade do |t|

@@ -2,8 +2,8 @@
 
 <% if user_signed_in? %>
     <li class="nav-item"><%= link_to 'Home', sittings_select_sitting_path, class: 'nav-link' %></li>
-<!--     <li class="nav-item"><%= link_to 'Record Attendance', students_home_path, class: 'nav-link' %></li> -->
-    <li class="nav-item"><%= link_to 'Manage Clients', students_manage_students_path, class: 'nav-link'%></li>
+<!--     <li class="nav-item"><%= link_to 'Record Attendance', clients_home_path, class: 'nav-link' %></li> -->
+    <li class="nav-item"><%= link_to 'Manage Clients', clients_manage_clients_path, class: 'nav-link'%></li>
     <li class="nav-item"><%= link_to 'Manage Partners', groups_manage_groups_path, class: 'nav-link' %></li>
     <li class="nav-item"><%= link_to 'Record Activities', meetings_show_other_path, class: 'nav-link' %></li>
     <li class="nav-item"><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete', class: 'nav-link' %></li>

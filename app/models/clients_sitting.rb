@@ -1,5 +1,5 @@
-class StudentsSitting < ActiveRecord::Base
-  belongs_to :student
+class ClientsSitting < ActiveRecord::Base
+  belongs_to :client
   belongs_to :sitting
   belongs_to :location_type
   belongs_to :attendance_status_type

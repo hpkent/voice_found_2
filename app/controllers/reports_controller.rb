@@ -7,23 +7,23 @@ class ReportsController < ApplicationController
     Date.new(params["#{field_name.to_s}(1i)"].to_i, params["#{field_name.to_s}(2i)"].to_i, params["#{field_name.to_s}(3i)"].to_i)
   end
 
-  def student_report
+  def client_report
     report_start_date = build_date_from_params("start_date", params[:report])
     report_end_date = build_date_from_params("end_date", params[:report])
-    @student = params[:Name]
-    @student = @student.gsub(/\s+/m, ' ').gsub(/^\s+|\s+$/m, '')
-    puts @student
-    if @student.match(" ")
-      #student has two names
-      student_array = @student.split(" ")
-      @first_name = student_array[0]
-      @last_name = student_array[1]
+    @client = params[:Name]
+    @client = @client.gsub(/\s+/m, ' ').gsub(/^\s+|\s+$/m, '')
+    puts @client
+    if @client.match(" ")
+      #client has two names
+      client_array = @client.split(" ")
+      @first_name = client_array[0]
+      @last_name = client_array[1]
       puts "full name: #{@first_name}"
-      @student_sittings_report = Meeting.select('students.first_name AS student_first_name, monastics.initials AS monastic_initials').joins('
-          INNER JOIN students ON students.id = meetings.student_id
-          LEFT OUTER JOIN monastics ON monastics.id = meetings.monastic_id'
-        ).where("meetings.start_date >= ? AND meetings.start_date <=? AND students.first_name=? AND students.last_name=?", report_start_date, report_end_date, @first_name, @last_name).order("meetings.start_date")
-      render "reports/student_report.xlsx.axlsx"
+      @client_sittings_report = Meeting.select('clients.first_name AS client_first_name, managers.initials AS manager_initials').joins('
+          INNER JOIN clients ON clients.id = meetings.client_id
+          LEFT OUTER JOIN managers ON managers.id = meetings.manager_id'
+        ).where("meetings.start_date >= ? AND meetings.start_date <=? AND clients.first_name=? AND clients.last_name=?", report_start_date, report_end_date, @first_name, @last_name).order("meetings.start_date")
+      render "reports/client_report.xlsx.axlsx"
     end
   end
 end

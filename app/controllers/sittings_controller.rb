@@ -36,14 +36,14 @@ class SittingsController < ApplicationController
     redirect_sitting_view(sitting_date)
   end
 
-  def redirect_sitting_view(sitting_date)  
-    if sitting_date < Date.today 
+  def redirect_sitting_view(sitting_date)
+    if sitting_date < Date.today
       respond_to do |format|
-        format.html { redirect_to("/students/schedule_meetings")}
+        format.html { redirect_to("/clients/schedule_meetings")}
       end
     else
       respond_to do |format|
-        format.html { redirect_to("/students/attendance")}
+        format.html { redirect_to("/clients/attendance")}
       end
     end
   end
@@ -63,11 +63,11 @@ class SittingsController < ApplicationController
     @update_flag = Sitting.where(start_date:params[:sitting][:start_date], start_time:params[:sitting][:start_time]).first_or_initialize
     respond_to do |format|
       if (@update_flag.update(sitting_params))
-        format.html { redirect_to '/students/schedule_meetings' }
-        format.json 
-        format.js   
+        format.html { redirect_to '/clients/schedule_meetings' }
+        format.json
+        format.js
       else
-        format.html { redirect_to '/students/schedule_meetings'}
+        format.html { redirect_to '/clients/schedule_meetings'}
       end
     end
   end
@@ -79,8 +79,8 @@ class SittingsController < ApplicationController
       # params.permit(:sitting, :event_title, :start_date, :end_date, :start_time, :end_time, :note_id)
     end
 
-    def students_sitting_params
-      params.require(:students_sitting).permit(:sitting_id, :student_id, :attendance_status_type_id, :special_status_type_id, :meeting_id, :hatto)
+    def clients_sitting_params
+      params.require(:clients_sitting).permit(:sitting_id, :client_id, :attendance_status_type_id, :special_status_type_id, :meeting_id, :hatto)
     end
 end
 
@@ -95,22 +95,22 @@ end
       # #utc time offset
       # offset = t.to_s.match((/[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} (-[0-9]{4})/))
       # puts "testing offset: #{offset}"
-      
+
       # utc_offset = offset[1].to_s
       # puts "testing utc offset: #{utc_offset}"
 
       # t_new = t.sub(utc_offset, '')
       # puts "t_new: #{t_new}"
-    
+
       # utc_test = utc_offset.insert(3,":")
       # puts "utc_offset insert 3: #{utc_test}"
       # local_start_time_test = t.localtime(utc_test).to_s
 
       # puts "local_start_time: #{local_start_time_test}"
-    
+
       # # end.date_time
       # if (sitting.end.date_time!=nil) then
-      #   t = Time.parse(sitting.end.date_time.strftime("%Y-%m-%d %H:%M:%S %z"))  
+      #   t = Time.parse(sitting.end.date_time.strftime("%Y-%m-%d %H:%M:%S %z"))
       # else
       #   next
       # end

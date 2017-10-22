@@ -16,16 +16,16 @@ wb.styles do |s|
     wb.add_worksheet(name: "Attendance Report") do |sheet|
       sheet.add_row heads, :style => style
 
-        @student_sittings_report.each do |record|
+        @client_sittings_report.each do |record|
 
-            if record.student_last_name != nil && record.monastic_initials !=nil
-                sheet.add_row [record.sitting_start_date, record.sitting_event_title, record.student_first_name + " " + record.student_last_name, record.monastic_initials], :height => 15
-            elsif record.student_last_name != nil
-               sheet.add_row [record.sitting_start_date, record.sitting_event_title, record.student_first_name + " " + record.student_last_name], :height => 15
-            elsif record.monastic_initials !=nil
-                sheet.add_row [record.sitting_start_date, record.sitting_event_title, record.student_first_name, record.monastic_initials], :height => 15
+            if record.client_last_name != nil && record.manager_initials !=nil
+                sheet.add_row [record.sitting_start_date, record.sitting_event_title, record.client_first_name + " " + record.client_last_name, record.manager_initials], :height => 15
+            elsif record.client_last_name != nil
+               sheet.add_row [record.sitting_start_date, record.sitting_event_title, record.client_first_name + " " + record.client_last_name], :height => 15
+            elsif record.manager_initials !=nil
+                sheet.add_row [record.sitting_start_date, record.sitting_event_title, record.client_first_name, record.manager_initials], :height => 15
             else
-                sheet.add_row [record.sitting_start_date, record.sitting_event_title, record.student_first_name], :height => 15
+                sheet.add_row [record.sitting_start_date, record.sitting_event_title, record.client_first_name], :height => 15
             end
         end
         sheet.column_widths 15, 20, 25, nil

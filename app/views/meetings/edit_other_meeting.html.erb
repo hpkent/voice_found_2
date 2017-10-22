@@ -16,7 +16,7 @@
           <%= f.hidden_field :meeting_type_id, :value => @other_meeting_type%>
        </div>
        <div class="field col-xs-3">
-          <%= f.hidden_field :student_id%>
+          <%= f.hidden_field :client_id%>
        </div>
        <div class="field col-xs-12">
           <%= f.label :start_date, "Meeting Date" %>
@@ -27,8 +27,8 @@
           <%= f.collection_select(:partner_id, Partner.all, :id, :org_name, {:class =>'form-control'}) %>
        </div>
        <div class="field col-xs-12">
-          <%= f.label :monastic_id, "Case Manager" %>
-          <%= f.collection_select(:monastic_id, Monastic.all, :id, :monastic_name, {:class =>'form-control'}) %>
+          <%= f.label :manager_id, "Case Manager" %>
+          <%= f.collection_select(:manager_id, Manager.all, :id, :manager_name, {:class =>'form-control'}) %>
        </div>
        <div class="field col-xs-12">
           <%= f.label :meeting_type_id, "Activity Type" %>

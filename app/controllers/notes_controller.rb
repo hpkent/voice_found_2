@@ -16,9 +16,9 @@ class NotesController < ApplicationController
         @sitting = Sitting.find(@sitting_id)
         @sitting.note_id = @note.id
         @sitting.save
-      else 
+      else
       end
-      redirect_to students_attendance_path
+      redirect_to clients_attendance_path
     else
     end
   end
@@ -26,7 +26,7 @@ class NotesController < ApplicationController
   def destroy
     note = Note.find(params[:id])
     note.destroy
-    redirect_to students_attendance_path
+    redirect_to clients_attendance_path
   end
 
   private

@@ -1,0 +1,68 @@
+<tr>
+   <td class="norm">
+      <% client = Client.find(@clients_sittings.client_id)%>
+      <% sitting = Sitting.find (@clients_sittings.sitting_id)%>
+      <% if client.last_name != nil %>
+         <%=client.first_name + " " + client.last_name%>
+      <%else %>
+         <%=client.first_name%>
+      <%end%>
+   </td>
+   <td id="td-align norm">
+      <div id="center">
+         <div class="btn-group" role="group">
+            <div id="btn-correction" class="btn btn-xs disabled">
+               <% if @clients_sittings.special_status_type_id != nil%>
+                  <%=@clients_sittings.special_status_type.name%>
+               <%end%>
+            </div>
+         </div>
+         <div id="scheduled_btn" class="btn">
+            <%=link_to "/clients/#{client.id}/new_special_status", class:"btn btn-default btn-xs" do%>
+               <i class="glyphicon glyphicon-edit"></i>
+            <%end%>
+         </div>
+      </div>
+   </td>
+   <td id="td-align norm">
+      <div id="center">
+         <% @clients_sittings_loc = ClientsSitting.new %>
+         <%= form_for(@clients_sittings_loc, :url => {:action => "update_location_status"}, :html => {:class => "loctype"}, remote: true) do |f| %>
+            <%= f.hidden_field :sitting_id, :value => sitting.id %>
+            <%= f.hidden_field :client_id, :value => client.id %>
+         <div id="scheduled_btn" class="btn">
+            <%
+            @clients_sittings_check = ClientsSitting.where(sitting_id:sitting.id,client_id:client.id).first_or_initialize
+            if @clients_sittings_check.hatto == true%>
+               <%= f.check_box :hatto, options = {:checked => true, :class => "checkbox"} %>
+            <%else%>
+               <%= f.check_box :hatto, options = {:checked => false, :class => "checkbox"} %>
+            <%end%>
+         </div>
+         <%end%>
+      </div>
+   </td>
+   <td id="td-align">
+      <%=link_to "/clients/#{@clients_sittings.id}/cancel_attendance", :method => :delete, :remote => true, class:"btn btn-default btn-xs cancel_attendance" do %>
+         <i class="glyphicon glyphicon-remove"></i>
+      <%end%>
+   </td>
+</tr>
+
+
+<script type="text/javascript">
+
+    // $(".test23").click(function(){
+    //     $(this).closest('tr').hide();
+    // });
+
+  // $(".test23").click(function(){
+  //    $(this).closest('tr').addClass('input-disabled');
+  //   });
+
+    // $(function(){
+    //     $('.checkbox').on('change',function(){
+    //         $('.loctype').submit();
+    //     });
+    // });
+</script>

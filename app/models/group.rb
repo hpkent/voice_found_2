@@ -1,3 +1,3 @@
 class Group < ActiveRecord::Base
-  has_many :students_groups
+  has_many :clients_groups
 end
